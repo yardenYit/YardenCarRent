@@ -1,0 +1,48 @@
+﻿<div class="headers">
+    <h2>User Order History</h2>
+</div>
+
+<!--<select ng-model="selectedOrderItem" ng-change="selectedOrdersOption(selectedOrderItem)">
+    <option value="" selected hidden />
+    <option value="All" ng-selected="true">All Orders</option>
+    <option value="Open">Open Orders</option>
+    <option value="Closed">Closed Orders</option>
+
+</select>-->
+
+<table class="table table-striped table-hover ">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>PIcture</th>
+            <th>Car Number</th>
+            <th>Car Manufacturer</th>
+            <th>Car Model</th>
+            <th>Year</th>
+            <th>Gear Type</th>         
+            <th>Pick-Up Date</th>
+            <th>Return Date</th>
+            <th>Actual End Date</th>
+            <th>Daily Cost</th>
+            <th>Daily Late Cost</th>
+            <th>UserName</th>           
+        </tr>
+    </thead>
+    <tbody>
+        <tr ng-repeat="item in allCarsOrders">
+            <td>{{$index + 1}}</td>
+            <td><img class="dataImg" ng-src="Images/SearchImages/{{item.ImageFileName}}"/></td>
+            <td>{{item.CarNumber}}</td>
+            <td>{{item.CarManufactureName}}</td>
+            <td>{{item.CarModelName}}</td>
+            <td>{{item.Year}}</td>
+            <td>{{item.GearTypeName}}</td>
+            <td>{{item.StartDate|date:"MM.dd.yyyy"}}</td>
+            <td>{{item.DesiredEndDate|date:"MM.dd.yyyy"}}</td>
+            <td>{{item.ActualEndDate|date:"MM.dd.yyyy"}}</td>
+            <td>{{item.DailyCost|currency:"$":0}}</td>
+            <td>{{item.DailyLateCost|currency:"$":0}}</td>
+            <td>{{item.UserName}}</td>
+        </tr>
+    </tbody>
+</table> 

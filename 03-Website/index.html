@@ -1,0 +1,190 @@
+﻿<!DOCTYPE html>
+<html ng-app="appModule">
+<head>
+    <title></title>
+    <meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!--  jQuery -->
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+
+    <!-- Special version of Bootstrap that only affects content wrapped in .bootstrap-iso -->
+    <link rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso.css" />
+
+    <!--Font Awesome (added because you use icons in your prepend/append)-->
+    <link rel="stylesheet" href="https://formden.com/static/cdn/font-awesome/4.4.0/css/font-awesome.min.css" />
+
+    <!--<link rel="shortcut icon" href="">-->
+    <!--  bootstraps -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/cosmo/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <!--  bootstraps datepicker plugin -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css" />
+
+    <link href="CSS/site.css" rel="stylesheet" />
+
+    <!--  angular -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-route.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/angular-ui/0.4.0/angular-ui.min.js"></script>
+
+    <!--adding ng-storge-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ngStorage/0.3.6/ngStorage.min.js"></script>
+
+    <!-- load ng-messages -->
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.0/angular-messages.js"></script>
+
+    <!--adding ng-table-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ng-table/1.0.0/ng-table.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ng-table/1.0.0/ng-table.min.js"></script>
+
+    <!--adding ngResource-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-resource/1.5.8/angular-resource.min.js"></script>
+
+
+    <!--module scripts-->
+    <script src="/Scripts/appModule.js"></script>
+    <script src="/Scripts/homePageModule.js"></script>
+    <script src="/Scripts/searchModule.js"></script>
+    <script src="/Scripts/signupModule.js"></script>
+    <script src="/Scripts/contactUsModule.js"></script>
+    <script src="/Scripts/CarReservationModule.js"></script>
+    <script src="/Scripts/fleetManagementModule.js"></script>
+    <script src="/Scripts/orderHistoryModule.js"></script>
+    <script src="Scripts/carReturnsModule.js"></script>
+    <script src="Scripts/userOrderHistoryModule.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.3.1/ui-bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.4.0/ui-bootstrap-tpls.min.js"></script>
+
+    <!-- angular-xeditable -->
+    <script src="http://vitalets.github.io/angular-xeditable/dist/js/xeditable.js"></script>
+    <script src="https://code.angularjs.org/1.0.8/angular-mocks.js"></script>
+    <link href="http://vitalets.github.io/angular-xeditable/dist/css/xeditable.css" rel="stylesheet">
+
+</head>
+<body>
+    <nav class="navbar navbar-inverse" ng-controller="LoginController">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Yarden Car Rent</a>
+            </div>
+
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="#">Home <span class="sr-only">(current)</span></a></li>
+                    <li><a href="#/search">Search car</a></li>
+                    <li class="dropdown" id="carReservation">
+                        <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Reservation <span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="#/carReservation">Car Reservation</a></li>
+                            <li><a href="#/userOrderHistory">Order History</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#/contactUs">Contact Us</a></li>
+                    <li class="dropdown" id="employeeMenu">
+                        <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Employee<span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="#/carReturns">Return Car</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="dropdown" id="mangaerMenu">
+                        <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Admin<span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="#/orderHistory">Watch Orders</a></li>
+                            <li><a href="#/fleetManagement">Fleet Management</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <!--<li class="navbar-text float-xs-right text-muted" style="color:white" ng-show="false" ng-model="hiUser">
+                        Hi {{userName}}
+                    </li>-->
+                    <li>
+                        <a id="logOut" class="dropdown-toggle" href="">Log Out <span class="glyphicon glyphicon-log-out"></span></a>
+                    </li>
+
+                    <li class="divider-vertical"></li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" href="" data-toggle="dropdown" id="signIn">Sign In <span class="glyphicon glyphicon-log-in"></span></a>
+                        <div class="dropdown-menu" id="logInForm">
+                            <!--Login form here-->
+                            <form name="logInForm" ua-error="error-msg" accept-charset="UTF-8" class="form container-fluid" novalidate ng-submit="signIn()">
+                                <div class="form-group" ng-class="{'has-error': logInForm.userName.$touched && logInForm.userName.$invalid}">
+                                    <label class="control-label" for="userName">Userame:</label>
+                                    <input type="text" ng-model="userName" class="form-control" id="userName" name="userName" placeholder="User Name" required>
+                                    <div class="help-block" ng-messages="logInForm.userName.$error" ng-show="logInForm.userName.$touched">
+                                        <div ng-messages-include="HTML/messages.html"></div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group" ng-class="{'has-error': logInForm.password.$touched && logInForm.password.$invalid}">
+                                    <label class="control-label" for="password">Password:</label>
+                                    <input type="password" ng-model="password" class="form-control" id="password" name="password" placeholder="Password" required>
+                                    <div class="help-block" ng-messages="logInForm.password.$error" ng-show="logInForm.password.$touched">
+                                        <div ng-messages-include="HTML/messages.html"></div>
+                                    </div>
+                                </div>
+
+                                <input class="btn btn-primary dropdown-toggle" style="width: 100%" type="submit" name="submit" value="Sign In" ng-disabled="logInForm.$invalid|| logInForm.$pending" />
+                                <br />
+                                <p id="error-msg"></p>
+                                <div>
+                                    <b>Not a member?</b>
+                                    <a class="small signUp" href="#/signup">Sign-up</a>
+                                </div>
+                            </form>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div ng-view></div>
+    <footer id="footer" class="navbar-fixed-bottom">
+        <div>All rights reserved &copy;</div>
+    </footer>
+
+
+    <!--modal messages-->
+    <div id="successModal" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="alert alert-dismissible alert-success">
+                        <strong>Success!</strong> You are logged in!
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="errorModal" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="alert alert-danger">
+                        <strong>Error!</strong> Failed to logged in- email or password are wrong!
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

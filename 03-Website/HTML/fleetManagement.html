@@ -1,0 +1,143 @@
+﻿<div class="headers">
+    <h2>Fleet Management</h2>
+</div>
+<div class="row" id="fleetTbl">
+    <div class="col-sm-11">
+        <table ng-table="tableParams" class="table table-bordered table-hover table-condensed editable-table demoTable" ng-form="tableForm" demo-tracked-table="tableTracker">
+            <colgroup>
+                <col width="10%" />
+                <col width="10%" />
+                <col width="10%" />
+                <col width="10%" />
+                <col width="10%" />
+                <col width="10%" />
+                <col width="10%" />
+                <col width="10%" />
+                <col width="10%" />
+                <col width="10%" />
+            </colgroup>
+            <tr ng-repeat="row in $data" ng-form="rowForm" demo-tracked-table-row="row">
+                <td data-title="'Car Number'" ng-switch="row.isEditing" ng-form="carNumber" demo-tracked-table-cell>
+                    <span ng-switch-default class="editable-text">{{row.CarNumber}}</span>
+                    <div class="controls" ng-class="{'has-error': carNumber.$dirty && carNumber.$invalid}" ng-switch-when="true">
+                        <input type="text" name="carNumber" ng-model="row.CarNumber" class="editable-input form-control input-sm" required />
+                    </div>
+                </td>
+
+                <td data-title="'Current Miles'" ng-switch="row.isEditing" ng-form="currentMiles" demo-tracked-table-cell>
+                    <span ng-switch-default class="editable-text">{{row.CurrentMiles}}</span>
+                    <div class="controls" ng-class="{'has-error': currentMiles.$dirty && currentMiles.$invalid}" ng-switch-when="true">
+                        <input type="text" name="currentMiles" ng-model="row.CurrentMiles" class="editable-input form-control input-sm" ng-pattern="/^[0-9]*$/" required />
+                    </div>
+                </td>
+
+                <td data-title="'OK to rent'" ng-switch="row.isEditing" ng-form="isOK2Rent" demo-tracked-table-cell>
+                    <span ng-switch-default class="editable-text">{{row.IsOK2Rent}}</span>
+                    <div class="controls" ng-class="{'has-error': isOK2Rent.$dirty && isOK2Rent.$invalid}" ng-switch-when="true">
+                        <select name="isOK2Rent" ng-model="row.IsOK2Rent" class="editable-input form-control input-sm" required>
+                            <option value="1" selected>true</option>
+                            <option value="0">false</option>
+                        </select>
+                    </div>
+                </td>
+
+                <td data-title="'Image'" ng-switch="row.isEditing" ng-form="imageFileName" demo-tracked-table-cell>
+                    <span ng-switch-default class="editable-text">{{row.ImageFileName}}</span>
+                    <div class="controls" ng-switch-when="true">
+                        <select name="imageFileName" ng-model="row.ImageFileName" class="editable-input form-control input-sm" ng-options="item for item in imgaes"></select>
+                    </div>
+                </td>
+
+                <td data-title="'Manufacture'" ng-switch="row.isEditing" ng-form="carManufactureName" demo-tracked-table-cell>
+                    <span ng-switch-default class="editable-text">{{row.CarManufactureName}}</span>
+                    <div class="controls" ng-class="{'has-error': carManufactureName.$dirty && carManufactureName.$invalid}" ng-switch-when="true">
+                        <select name="carManufactureName" ng-model="row.CarManufactureName" class="editable-input form-control input-sm"
+                                ng-options="item.CarManufactureName for item in manufacturers"
+                                ng-init="row.CarManufactureName=manufacturers[item]"                
+                                ng-change="changedCarManufactureValue(row.CarManufactureName)" required>
+                            <option value="" selected hidden />
+                        </select>
+                    </div>
+                </td>
+
+                <td data-title="'Model'" ng-switch="row.isEditing" ng-form="carModelName" demo-tracked-table-cell>
+                    <span ng-switch-default class="editable-text">{{row.CarModelName}}</span>
+                    <div class="controls" ng-class="{'has-error': carModelName.$dirty && carModelName.$invalid}" ng-switch-when="true">
+                        <select name="carModelName" ng-model="row.CarModelName" class="editable-input form-control input-sm"
+                                ng-options="item.CarModelName for item in model | filter:{CarManufactureID: row.CarManufactureName.CarManufactureID}"
+                                ng-init="row.CarModelName=model[item]"   
+                                ng-change="changedCarModelValue(row.CarModelName)" required>
+                            <option value="" selected hidden />
+                        </select>
+                    </div>
+                </td>
+
+                <td data-title="'Year'" ng-switch="row.isEditing" ng-form="year" demo-tracked-table-cell>
+                    <span ng-switch-default class="editable-text">{{row.Year}}</span>
+                    <div class="controls" ng-class="{'has-error': year.$dirty && year.$invalid}" ng-switch-when="true">
+                        <input type="text" name="year" ng-model="row.Year" class="editable-input form-control input-sm" ng-pattern="/^[0-9]*$/" required />
+                    </div>
+                </td>
+
+                <td data-title="'Gear Type'" ng-switch="row.isEditing" ng-form="gearType" demo-tracked-table-cell>
+                    <span ng-switch-default class="editable-text">{{row.GearTypeName}}</span>
+                    <div class="controls" ng-class="{'has-error': gearType.$dirty && gearType.$invalid}" ng-switch-when="true">
+                        <select name="gearType" ng-model="row.GearTypeName" class="editable-input form-control input-sm" ng-options="item for item in transmission" required></select>
+                    </div>
+                </td>
+
+                <td data-title="'Daily Cost'" ng-switch="row.isEditing" ng-form="dailyCost" demo-tracked-table-cell>
+                    <span ng-switch-default class="editable-text">{{row.DailyCost}}</span>
+                    <div class="controls" ng-class="{'has-error': dailyCost.$dirty && dailyCost.$invalid}" ng-switch-when="true">
+                        <input type="text" name="dailyCost" ng-model="row.DailyCost" class="editable-input form-control input-sm" ng-pattern="/^[0-9]*$/" required />
+                    </div>
+                </td>
+
+                <td data-title="'Daily Late Cost'" ng-switch="row.isEditing" ng-form="dailyLateCost" demo-tracked-table-cell>
+                    <span ng-switch-default class="editable-text">{{row.DailyLateCost}}</span>
+                    <div class="controls" ng-class="{'has-error': dailyLateCost.$dirty && dailyLateCost.$invalid}" ng-switch-when="true">
+                        <input type="text" name="dailyLateCost" ng-model="row.DailyLateCost" class="editable-input form-control input-sm" ng-pattern="/^[0-9]*$/" required />
+                    </div>
+                </td>
+
+                <td data-title="'Action'">
+                    <button class="btn btn-primary btn-sm" ng-click="save(row, rowForm)" ng-if="row.isEditing" ng-disabled="rowForm.$pristine || rowForm.$invalid"><span class="glyphicon glyphicon-ok"></span></button>
+                    <button class="btn btn-default btn-sm" ng-click="cancel(row, rowForm)" ng-if="row.isEditing"><span class="glyphicon glyphicon-remove"></span></button>
+                    <button class="btn btn-default btn-sm" ng-click="row.isEditing = true; getManufacture();getModel();getCarImages();getGearTypes()" ng-if="!row.isEditing"><span class="glyphicon glyphicon-pencil"></span></button>
+                    <button class="btn btn-danger btn-sm" ng-click="del(row)" ng-if="!row.isEditing"><span class="glyphicon glyphicon-trash"></span></button>
+                </td>
+            </tr>
+
+        </table>
+        <button type="button" class="btn btn-default" ng-click="addCarFleet()">Add row</button>
+    </div>
+</div>
+
+<div id="successModal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="alert alert-dismissible alert-success">
+                    <strong>Success!</strong> The information has been successfully updated
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="errorModal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="alert alert-danger">
+                    <strong>Error!</strong> Update failed
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

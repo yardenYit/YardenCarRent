@@ -1,0 +1,156 @@
+﻿* {
+    box-sizing: border-box;
+}
+
+.row::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+#actualEndDate{
+  position:relative;
+}
+/*start search css*/
+#datePickerTable
+{
+    width:350px;
+    border-collapse: separate;
+    border-spacing: 0px,10px,10px,10px;
+}
+
+#datePickerTable td
+{
+    padding-right: 40px;    
+}
+/* start filter table */
+
+.selectInLine
+{
+    display:inline;
+}
+
+#filtertable td{
+    padding-right: 50px;    
+}
+
+#filterDiv
+{
+    background:#eee;
+    height:80px;
+    padding-top:5px;
+}
+
+
+/* end filter table */
+
+/*start cars data css*/
+
+.deatailsHeader{
+    font-weight:bold
+}
+
+.dataImg
+{
+    width:350px;
+}
+
+.carDeatails
+{
+    font-size:20px;
+}
+
+.carReservation {
+    padding-left:10px;
+    font-size:20px;
+}
+#carsDataSection button
+{
+    margin-top:20px;
+}
+
+.rowBorder
+{
+    border-bottom:1px solid #eee
+   
+}
+/*end cars data css*/
+
+/*end search css*/
+
+
+.demoTable td:last-child {
+  min-width: 90px;
+}
+
+/** Editable table
+------------------------- */
+
+.editable-table > tbody > tr > td {
+  padding: 4px
+}
+.editable-text {
+  padding-left: 4px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  display: inline-block;
+}
+.editable-table tbody > tr > td > .controls {
+  //width: 100%
+}
+.editable-input {
+  padding-left: 3px;
+}
+.editable-input.input-sm {
+  height: 30px;
+  font-size: 14px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+/*carusel*/
+.carousel{
+    background: #2f4357;
+    margin-top: 20px;
+}
+.carousel .item{
+    min-height: 280px; /* Prevent carousel from being distorted if for some reason image doesn't load */
+}
+.carousel .item img{
+    margin: 0 auto; /* Align slide image horizontally center */
+}
+.bs-example{
+	margin: 20px;
+    margin-top:55px;
+}
+
+.carouselImg{
+    width:400px;
+    height:250px !important;
+    margin-top:30px !important;
+}
+/*carusel*/
+
+/*footer*/
+#footer{
+    background:#1a6ecc;
+    color:white;
+    height:40px;
+    text-align:center;
+    padding-top:10px
+}
+
+/*headers*/
+.headers h2 ,.headers h3{
+     color: #2f4357;
+     font-weight:normal;
+     margin: 20px;
+}
+
+.orderStatusSelect{
+    margin-left:20px;
+}
+
+#fleetTbl{
+    margin-left:5px;
+}

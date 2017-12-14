@@ -1,0 +1,154 @@
+﻿<div class="headers">
+    <h2>Search a Car</h2>
+</div>
+
+<section>
+    <!-- Form code begins -->
+    <form name="serchForm" novalidate>
+        <div class="container-fluid">
+            <div class="row">
+                <!-- Date input -->
+                <div class="col-xs-2 form-group" ng-class="{'has-error': serchForm.pickUpdate.$touched && serchForm.pickUpdate.$invalid}">
+                    <label class="control-label" for="pickUpDate" requiredField>Pick-up Date:</label>
+                    <input class="form-control" id="pickUpDate" ng-model="startDate" name="pickUpdate" placeholder="MM/DD/YYY" type="text" required />
+                    <div class="help-block" ng-messages="serchForm.pickUpdate.$error" ng-show="serchForm.pickUpdate.$touched">
+                        <div ng-messages-include="HTML/messages.html"></div>
+                    </div>
+                </div>
+                <div class="col-xs-2 form-group" ng-class="{'has-error': serchForm.returndate.$touched && serchForm.returndate.$invalid}">
+                    <label class="control-label" for="returnDate" requiredField>Return Date:</label>
+                    <input class="form-control" id="returnDate" ng-model="endDate" name="returndate" placeholder="MM/DD/YYY" type="text" required />
+                    <div class="help-block" ng-messages="serchForm.returndate.$error" ng-show="serchForm.returndate.$touched">
+                        <div ng-messages-include="HTML/messages.html"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-2">
+                    <div class="form-group">
+                        <!-- Submit button -->
+                        <button class="btn btn-primary" ng-disabled="serchForm.$invalid|| serchForm.$pending" ng-click="getAllAvailableCars();reservationDate()" name="submit" type="submit">Submit</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <!-- Form code ends -->
+</section>
+
+<!--filter data section-->
+<section id="filterSection" ng-hide="IsHidden">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-2 col-xs-12">
+                    <label>Transmission</label>
+                </div>
+                <div class="col-sm-2 col-xs-12">
+                    <label>Year</label>
+                </div>
+                <div class="col-sm-2 col-xs-12">
+                    <label>Company</label>
+                </div>
+                <div class="col-sm-2 col-xs-12">
+                    <label>Model</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-2 col-xs-12">
+                    <select class="form-control" ng-model="selectedTransmission" ng-options="item for item in transmission|unique:'transmission'">
+                        <option label="Please select" disabled></option>
+                    </select>
+                </div>
+                <div class="col-sm-2 col-xs-12">
+                    <select class="form-control" ng-model="selectedYear" ng-options="item for item in years|unique:'years'">
+                        <option label="Please select" disabled></option>
+                    </select>
+                </div>
+                <div class="col-sm-2 col-xs-12">
+                    <select class="form-control" ng-model="selectedcompany" ng-options="item for item in manufacture|unique:'manufacture'">
+                        <option label="Please select" disabled></option>
+                    </select>
+                </div>
+                <div class="col-sm-2 col-xs-12">
+                    <select class="form-control" ng-model="selectedModel" ng-options="item for item in model|unique:'model'">
+                        <option label="Please select" disabled></option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <br /><br />
+</section>
+<!--filter data section end-->
+
+<!--data section-->
+<section id="carsDataSection" class="container-fluid">
+    <div class="row rowBorder" id="{{item.CarFleetID}}" ng-repeat="item in allCar4Rent |filter:selectedYear|filter:selectedTransmission|filter:selectedcompany|filter:selectedModel">
+        <div class="col-sm-4 col-xs-12">
+            <img class="dataImg" ng-src="Images/SearchImages/{{item.ImageFileName}}" />
+        </div>
+        <div class="col-sm-3 col-xs-12">
+            <h3 class="deatailsHeader">{{item.CarManufactureName}}&nbsp;{{item.CarModelName}}</h3>
+            <div class="carDeatails">{{item.Year}}</div>
+            <div class="carDeatails">{{item.GearTypeName}}</div>
+        </div>
+        <div class="col-sm-3 col-xs-12">
+            <h3 class="deatailsHeader">Cost</h3>
+            <div class="carDeatails">Daily Cost: {{item.DailyCost|currency:"$":0}}</div>
+            <div class="carDeatails">Daily Late Cost: {{item.DailyLateCost|currency:"$":0}}</div>
+        </div>
+        <div class="col-sm-2 col-xs-12">
+            <button class="btn btn-primary" name="submit" ng-click="reservationCarData(item)" type="submit">Order This Car</button>
+        </div>
+        <br />
+    </div>
+</section>
+<!--data section end-->
+
+<!--modal messages-->
+<div id="successModal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="alert alert-dismissible alert-success">
+                    <strong>Success!</strong> Search succeeded!
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="errorModal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="alert alert-danger">
+                    <strong>Error!</strong> Search failed!
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    $(document).ready(function () {
+        var date_input = $('input[name$="date"]'); //our date input has the name "date"
+        var container = $('.bootstrap-iso form').length > 0 ? $('.bootstrap-iso form').parent() : "body";
+        date_input.datepicker({
+            format: 'mm/dd/yyyy',
+            container: container,
+            todayHighlight: true,
+            autoclose: true,
+            startDate: new Date(),
+            orientation: "auto",
+        })
+
+      
+    })
+</script>

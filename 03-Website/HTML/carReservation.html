@@ -1,0 +1,59 @@
+﻿<div class="headers">
+    <h2>Car Reservation</h2>
+</div>
+
+<section id="carsDataSection" class="container-fluid">
+    <div class="row">
+        <div class="col-sm-4 col-xs-12">
+            <div class="carReservation">Pick-up Date: {{startDate}}</div>
+            <div class="carReservation">Return Date:{{endDate}}</div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-4 col-xs-12">
+            <img class="dataImg" ng-src="Images/SearchImages/{{carData.ImageFileName}}" />
+        </div>
+        <div class="col-sm-3 col-xs-12">
+            <h3 class="deatailsHeader">{{carData.CarManufactureName}}&nbsp;{{carData.CarModelName}}</h3>
+            <div class="carDeatails">{{carData.Year}}</div>
+            <div class="carDeatails">{{carData.GearTypeName}}</div>
+        </div>
+        <div class="col-sm-3 col-xs-12">
+            <h3 class="deatailsHeader">Cost</h3>
+            <div class="carDeatails">Daily Cost: {{carData.DailyCost|currency:"$":0}}</div>
+            <div class="carDeatails">Daily Late Cost: {{carData.DailyLateCost|currency:"$":0}}</div>
+        </div>
+        <div class="col-sm-2 col-xs-12">
+            <button class="btn btn-primary" name="submit" ng-click="addReservation()" type="submit">Order Now</button>
+        </div>
+    </div>
+</section>
+
+<div id="successModal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="alert alert-dismissible alert-success">
+                    <strong>Success!</strong> Order was made!
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="errorModal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="alert alert-danger">
+                    <strong>Error!</strong> Order failed!
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
